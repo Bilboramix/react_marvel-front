@@ -1,7 +1,9 @@
 import logo from "../assets/logo-marvel.png";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const Header = () => {
+const Header = ({ setSearch }) => {
+  const [input, setInput] = useState();
   return (
     <header>
       <nav className="container">
@@ -11,6 +13,17 @@ const Header = () => {
         <Link to="/">Personnages</Link>
         <Link to="/comics">Comics</Link>
         <Link to="/favorites">Favoris</Link>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            setSearch(input);
+          }}
+        >
+          <span>Rechercher par nom : </span>
+          <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
+          <button type="submit">Go</button>
+        </form>
       </nav>
     </header>
   );

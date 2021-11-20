@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-const Comics = () => {
+const Comics = ({ search }) => {
   const [limitQuery, setLimitQuery] = useState(100);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
@@ -12,7 +12,10 @@ const Comics = () => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const url = `http://localhost:3001/comics?limit=${limitQuery}&page=${page}`;
+        let url = `http://localhost:3001/comics?limit=${limitQuery}&page=${page}`;
+        if (search.length > 0) {
+          url = url + `&title=${search}`;
+        }
         const response = await axios.get(url);
         setData(response.data);
         setIsLoading(false);
@@ -22,7 +25,7 @@ const Comics = () => {
     };
 
     fetchData();
-  }, [limitQuery, page]);
+  }, [limitQuery, page, search]);
 
   const handlePagePicker = (e) => {
     e.preventDefault();
