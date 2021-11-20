@@ -1,18 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 const Characters = () => {
-  const defaultUrl = "http://localhost:3001/characters?limit=100";
+  const [limitQuery, setLimitQuery] = useState(100);
+  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  const [url, setUrl] = useState(defaultUrl);
+  const [pagePicker, setPagePicker] = useState(page);
+
   const [data, setData] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-
+        const url = `http://localhost:3001/characters?limit=${limitQuery}&page=${page}`;
         const response = await axios.get(url);
-        console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -21,42 +22,72 @@ const Characters = () => {
     };
 
     fetchData();
-  }, [url, setUrl]);
+  }, [limitQuery, page]);
+
+  const handlePagePicker = (e) => {
+    e.preventDefault();
+    if (pagePicker > Math.round(data.count / data.limit) || pagePicker < 1) {
+      alert("Cette page n'existe pas !");
+    } else {
+      setPage(Number(pagePicker));
+    }
+  };
 
   return isLoading ? (
     <p>Loading ...</p>
   ) : (
     <section className="container">
       <div>
-        <button>Next</button>
-        <button>Prev</button>
         <h2>Liste des personnages de Marvel</h2>
         <ul>
-          <li>Résultats par page : {data.limit}</li>
-          <li>Nombre de pages : {Math.round(data.count / data.limit)}</li>
           <li>Résultats totaux : {data.count}</li>
+          <li>Nombre de pages : {Math.round(data.count / data.limit)}</li>
+
+          <li>Page actuelle : {page}</li>
+
+          <li>
+            {page < data.count && (
+              <button
+                onClick={() => {
+                  setPage(page + 1);
+                }}
+              >
+                Next
+              </button>
+            )}
+            {page > 1 && <button onClick={() => setPage(page - 1)}>Prev</button>}
+          </li>
+          <form onSubmit={handlePagePicker}>
+            Aller à la page <input onChange={(e) => setPagePicker(e.target.value)} type="number" name="page" value={pagePicker} /> <button type="submit">Go</button>
+          </form>
+          <li>Résultats par page : {data.limit}</li>
+          <li>
+            <button
+              onClick={() => {
+                //setUrl("http://localhost:3001/comics?limit=25");
+                setLimitQuery(25);
+              }}
+            >
+              25
+            </button>
+            <button
+              onClick={() => {
+                //setUrl("http://localhost:3001/comics?limit=50");
+                setLimitQuery(50);
+              }}
+            >
+              50
+            </button>
+            <button
+              onClick={() => {
+                //setUrl("http://localhost:3001/comics?limit=100");
+                setLimitQuery(100);
+              }}
+            >
+              100
+            </button>
+          </li>
         </ul>
-        <button
-          onClick={() => {
-            setUrl("http://localhost:3001/characters?limit=25");
-          }}
-        >
-          25
-        </button>
-        <button
-          onClick={() => {
-            setUrl("http://localhost:3001/characters?limit=50");
-          }}
-        >
-          50
-        </button>
-        <button
-          onClick={() => {
-            setUrl("http://localhost:3001/characters?limit=100");
-          }}
-        >
-          100
-        </button>
       </div>
       {data.results.map((character, index) => {
         return (
