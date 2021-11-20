@@ -1,1 +1,11 @@
 /* Other rules */
+nav img {
+  width: 150px;
+  border-radius: 5px;
+}
+
+.container {
+  max-width: 1240px;
+  margin-inline: auto;
+  border: 1px solid black;
+}
