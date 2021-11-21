@@ -45,13 +45,22 @@ const Characters = ({ search, canSearch, setCanSearch }) => {
   const handleFavorite = (character) => {
     if (Cookies.get("fav-char")) {
       const newCookie = Cookies.get("fav-char").split(",");
-      newCookie.push(character.name);
+      if (newCookie.indexOf(character.name) === -1) {
+        newCookie.push(character.name);
+      }
       newCookie.toString();
       Cookies.remove("fav-char");
       Cookies.set("fav-char", newCookie);
     } else {
       Cookies.set("fav-char", character.name);
     }
+
+    if (!Cookies.get(`${character.name}`)) {
+      const imgUrl = character.thumbnail.path + "." + character.thumbnail.extension;
+      Cookies.set(`${character.name}`, imgUrl);
+    }
+
+    console.log(character);
   };
 
   /* 
