@@ -8,7 +8,7 @@ import Favorites from "./pages/Favorites";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
-//TODO - clic sur personnage, favoris, CSS
+//TODO - favoris, CSS
 //DOC API : https://lereacteur-marvel-api.netlify.app/documentation
 
 const App = () => {

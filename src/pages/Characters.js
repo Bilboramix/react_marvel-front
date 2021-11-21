@@ -38,6 +38,10 @@ const Characters = ({ search, canSearch, setCanSearch }) => {
     }
   };
 
+  const handleFavorite = (character) => {
+    console.log(character);
+  };
+
   return isLoading ? (
     <p>Loading ...</p>
   ) : (
@@ -106,6 +110,13 @@ const Characters = ({ search, canSearch, setCanSearch }) => {
               <p>{character.name}</p>
               <img src={character.thumbnail.path + "." + character.thumbnail.extension} alt={character.name} />
             </Link>
+            <button
+              onClick={() => {
+                handleFavorite(character);
+              }}
+            >
+              Ajouter aux favoris
+            </button>
           </div>
         );
       })}
