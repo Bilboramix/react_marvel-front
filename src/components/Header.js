@@ -22,7 +22,7 @@ const Header = ({ setSearch, canSearch }) => {
             }}
           >
             <span>Rechercher par nom : </span>
-            <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
+            <input type="text" onChange={(e) => setInput(e.target.value)} />
             <button type="submit">Go</button>
           </form>
         )}

@@ -18,9 +18,7 @@ const Characters = ({ search, canSearch, setCanSearch }) => {
         if (search.length > 0) {
           url = url + `&title=${search}`;
         }
-        console.log(url);
         const response = await axios.get(url);
-        console.log("response characterSS =======> ", response);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
