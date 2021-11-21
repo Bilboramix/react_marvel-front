@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 const Comics = ({ search, canSearch, setCanSearch }) => {
   const [limitQuery, setLimitQuery] = useState(100);
@@ -35,6 +36,27 @@ const Comics = ({ search, canSearch, setCanSearch }) => {
     } else {
       setPage(Number(pagePicker));
     }
+  };
+
+  const handleFavorite = (comic) => {
+    if (Cookies.get("fav-comic")) {
+      const newCookie = Cookies.get("fav-comic").split(",");
+      if (newCookie.indexOf(comic.title) === -1) {
+        newCookie.push(comic.title);
+      }
+      newCookie.toString();
+      Cookies.remove("fav-comic");
+      Cookies.set("fav-comic", newCookie);
+    } else {
+      Cookies.set("fav-comic", comic.title);
+    }
+
+    if (!Cookies.get(`${comic.title}`)) {
+      const imgUrl = comic.thumbnail.path + "." + comic.thumbnail.extension;
+      Cookies.set(`${comic.title}`, imgUrl);
+    }
+
+    console.log(comic);
   };
 
   return isLoading ? (
@@ -98,6 +120,13 @@ const Comics = ({ search, canSearch, setCanSearch }) => {
           <div key={comic._id}>
             <p>{comic.title}</p>
             <img src={comic.thumbnail.path + "." + comic.thumbnail.extension} alt={comic.title} />
+            <button
+              onClick={() => {
+                handleFavorite(comic);
+              }}
+            >
+              Ajouter aux favoris
+            </button>
           </div>
         );
       })}

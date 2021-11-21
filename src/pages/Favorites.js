@@ -1,47 +1,45 @@
 import Cookies from "js-cookie";
-import axios from "axios";
+
 import { useEffect, useState } from "react";
 
 const Favorites = () => {
-  const [favChar, setFavChar] = useState();
+  const [favChars, setFavChars] = useState();
+  const [favComics, setFavComics] = useState();
+
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    /* const favCharName = Cookies.get("fav-char").split(",");
-    console.log(favCharName);
-    const processTab = [];
-    const fetchData = async () => {
-      const sleep = (ms) => {
-        return new Promise((resolve) => {
-          setTimeout(resolve, ms);
-        });
-      };
-
-      for (let i = 0; i < favCharId.length; i++) {
-        const response = await axios.get(`http://localhost:3001/character?characterId=${favCharId[i]}`);
-        console.log("Response ========> ", response);
-        sleep(5000).then(processTab.push(response.data));
-      }
-      setFavChar([...processTab]);
-    };
-    fetchData();
-    console.log("FIN DU USE-EFFECT ======> ", favChar); */
-
-    setFavChar(Cookies.get("fav-char").split(","));
+    setFavChars(Cookies.get("fav-char").split(","));
+    setFavComics(Cookies.get("fav-comic").split(","));
     setIsLoading(false);
   }, []);
   return isLoading ? (
     <p>Loading</p>
   ) : (
     <section className="container">
-      {favChar.map((fav, index) => {
-        return (
-          <div>
-            <h3>{fav}</h3>
-            <img src={Cookies.get(`${fav}`)} alt={fav} />
-          </div>
-        );
-      })}
+      <div>
+        <h3>Personnages favoris</h3>
+        {favChars.map((fav, index) => {
+          return (
+            <div>
+              <h4>{fav}</h4>
+              <img src={Cookies.get(`${fav}`)} alt={fav} />
+            </div>
+          );
+        })}
+      </div>
+
+      <div>
+        <h3>Comics favoris</h3>
+        {favComics.map((fav, index) => {
+          return (
+            <div>
+              <h4>{fav}</h4>
+              <img src={Cookies.get(`${fav}`)} alt={fav} />
+            </div>
+          );
+        })}
+      </div>
     </section>
   );
 };
