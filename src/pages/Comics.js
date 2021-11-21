@@ -14,7 +14,7 @@ const Comics = ({ search, canSearch, setCanSearch }) => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        let url = `http://localhost:3001/comics?limit=${limitQuery}&page=${page}`;
+        let url = `https://bilbo-marvel-back.herokuapp.com/comics?limit=${limitQuery}&page=${page}`;
         if (search.length > 0) {
           url = url + `&title=${search}`;
         }
@@ -92,7 +92,6 @@ const Comics = ({ search, canSearch, setCanSearch }) => {
           <label>Résultats par page : {data.limit}</label>
           <button
             onClick={() => {
-              //setUrl("http://localhost:3001/comics?limit=25");
               setLimitQuery(25);
             }}
           >
@@ -100,7 +99,6 @@ const Comics = ({ search, canSearch, setCanSearch }) => {
           </button>
           <button
             onClick={() => {
-              //setUrl("http://localhost:3001/comics?limit=50");
               setLimitQuery(50);
             }}
           >
@@ -108,7 +106,6 @@ const Comics = ({ search, canSearch, setCanSearch }) => {
           </button>
           <button
             onClick={() => {
-              //setUrl("http://localhost:3001/comics?limit=100");
               setLimitQuery(100);
             }}
           >

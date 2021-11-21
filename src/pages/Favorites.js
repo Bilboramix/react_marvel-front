@@ -23,7 +23,7 @@ const Favorites = ({ setCanSearch }) => {
         {favChars.map((fav, index) => {
           return (
             <div className="card">
-              <h4>{fav}</h4>
+              <h3>{fav}</h3>
               <img src={Cookies.get(`${fav}`)} alt={fav} />
             </div>
           );
@@ -35,7 +35,7 @@ const Favorites = ({ setCanSearch }) => {
         {favComics.map((fav, index) => {
           return (
             <div className="card">
-              <h4>{fav}</h4>
+              <h3>{fav}</h3>
               <img src={Cookies.get(`${fav}`)} alt={fav} />
             </div>
           );
