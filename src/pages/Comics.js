@@ -71,7 +71,7 @@ const Comics = ({ search, canSearch, setCanSearch }) => {
         </div>
         <div className="pagination">
           <label>Page actuelle : {page}</label>
-          {page < data.count && (
+          {page < Math.round(data.count / data.limit) && (
             <button
               onClick={() => {
                 setPage(page + 1);
