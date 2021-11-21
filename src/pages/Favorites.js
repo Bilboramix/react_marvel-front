@@ -11,11 +11,15 @@ const Favorites = ({ setCanSearch }) => {
 
   useEffect(() => {
     setCanSearch(false);
-    if (Cookies.get("fav-char") === undefined || Cookies.get("fav-comic") === undefined) {
+    if (Cookies.get("fav-char") === undefined && Cookies.get("fav-comic") === undefined) {
       navigate("/");
     } else {
-      setFavChars(Cookies.get("fav-char").split(","));
-      setFavComics(Cookies.get("fav-comic").split(","));
+      if (Cookies.get("fav-char")) {
+        setFavChars(Cookies.get("fav-char").split(","));
+      }
+      if (Cookies.get("fav-comic")) {
+        setFavComics(Cookies.get("fav-comic").split(","));
+      }
 
       setIsLoading(false);
     }
@@ -24,29 +28,33 @@ const Favorites = ({ setCanSearch }) => {
     <section className="container">Loading</section>
   ) : (
     <section className="container fav-board">
-      <div className="cardboard">
-        <h2>Personnages favoris</h2>
-        {favChars.map((fav, index) => {
-          return (
-            <div className="card">
-              <h3>{fav}</h3>
-              <img src={Cookies.get(`${fav}`)} alt={fav} />
-            </div>
-          );
-        })}
-      </div>
+      {favChars && (
+        <div className="cardboard">
+          <h2>Personnages favoris</h2>
+          {favChars.map((fav, index) => {
+            return (
+              <div className="card">
+                <h3>{fav}</h3>
+                <img src={Cookies.get(`${fav}`)} alt={fav} />
+              </div>
+            );
+          })}
+        </div>
+      )}
 
-      <div className="cardboard">
-        <h2>Comics favoris</h2>
-        {favComics.map((fav, index) => {
-          return (
-            <div className="card">
-              <h3>{fav}</h3>
-              <img src={Cookies.get(`${fav}`)} alt={fav} />
-            </div>
-          );
-        })}
-      </div>
+      {favComics && (
+        <div className="cardboard">
+          <h2>Comics favoris</h2>
+          {favComics.map((fav, index) => {
+            return (
+              <div className="card">
+                <h3>{fav}</h3>
+                <img src={Cookies.get(`${fav}`)} alt={fav} />
+              </div>
+            );
+          })}
+        </div>
+      )}
     </section>
   );
 };
