@@ -90,7 +90,7 @@ const Characters = ({ search, canSearch, setCanSearch }) => {
         </div>
 
         <div className="pagination">
-          <label>Résultats par page : {data.limit}</label>
+          <p>Résultats par page : {data.limit}</p>
           <button
             onClick={() => {
               //setUrl("http://localhost:3001/comics?limit=25");
@@ -120,7 +120,7 @@ const Characters = ({ search, canSearch, setCanSearch }) => {
       <div className="cardboard">
         {data.results.map((character, index) => {
           return (
-            <div className="card" key={character._id}>
+            <div className="card char-card" key={character._id}>
               <Link
                 to={{
                   pathname: "/character",

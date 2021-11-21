@@ -102,12 +102,12 @@ nav img {
 
 main {
   background-color: #1a1b1d;
+  padding-top: 25px;
 }
 
 /* RESULT BOARD */
 
 .result-board {
-  padding-top: 25px;
   display: flex;
   flex-direction: column;
   font-family: "Roboto", sans-serif;
@@ -176,7 +176,7 @@ h3 {
   border-radius: 20px;
 }
 
-.card:hover {
+.char-card:hover {
   background-color: rgb(54, 29, 29);
 }
 
@@ -196,4 +196,11 @@ h3 {
   line-height: 35px;
   overflow: hidden;
   height: 45px;
+}
+
+/* FAVORITE SPECIFICS */
+
+.fav-board {
+  display: flex;
+  flex-direction: column;
 }

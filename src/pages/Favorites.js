@@ -18,11 +18,11 @@ const Favorites = ({ setCanSearch }) => {
     <section className="container">Loading</section>
   ) : (
     <section className="container fav-board">
-      <div>
-        <h3>Personnages favoris</h3>
+      <div className="cardboard">
+        <h2>Personnages favoris</h2>
         {favChars.map((fav, index) => {
           return (
-            <div>
+            <div className="card">
               <h4>{fav}</h4>
               <img src={Cookies.get(`${fav}`)} alt={fav} />
             </div>
@@ -30,11 +30,11 @@ const Favorites = ({ setCanSearch }) => {
         })}
       </div>
 
-      <div>
-        <h3>Comics favoris</h3>
+      <div className="cardboard">
+        <h2>Comics favoris</h2>
         {favComics.map((fav, index) => {
           return (
-            <div>
+            <div className="card">
               <h4>{fav}</h4>
               <img src={Cookies.get(`${fav}`)} alt={fav} />
             </div>
