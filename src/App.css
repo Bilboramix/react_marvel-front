@@ -1,11 +1,199 @@
-/* Other rules */
-nav img {
-  width: 150px;
-  border-radius: 5px;
+/* COMMON */
+
+/*     
+font-family: 'Marvel', sans-serif;
+font-family: 'Roboto', sans-serif; 
+*/
+
+* {
+  box-sizing: border-box;
+  object-fit: cover;
+  color: white;
+  text-decoration: none;
+  font-family: "Marvel", sans-serif;
 }
 
 .container {
   max-width: 1240px;
   margin-inline: auto;
-  border: 1px solid black;
+}
+
+input {
+  background-color: rgb(184, 183, 183);
+  color: black;
+}
+
+header,
+footer {
+  background-color: #0c0d0e;
+  font-family: "Marvel", sans-serif;
+  font-weight: 700;
+}
+
+button {
+  background-color: rgb(36, 32, 32);
+  font-size: 15px;
+  font-family: "Roboto", sans-serif;
+  border-radius: 5px;
+  border: 1px solid white;
+  box-shadow: 1px 1px 5px white;
+  cursor: pointer;
+}
+button:hover {
+  background-color: rgb(0, 0, 0);
+  border: 1px solid rgb(94, 80, 80);
+  box-shadow: 1px 1px 5px rgb(94, 80, 80);
+}
+/* HEADER */
+
+header {
+  font-size: 26px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+nav img {
+  width: 150px;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.menu a {
+  background-color: rgb(36, 32, 32);
+  padding: 10px;
+  border-radius: 15px;
+  border: solid white 1px;
+  box-shadow: 1px 1px 5px white;
+  width: 135px;
+  display: flex;
+  justify-content: center;
+}
+.menu a:hover {
+  background-color: rgb(0, 0, 0);
+  border-radius: 15px;
+  border: solid rgb(94, 80, 80) 1px;
+  box-shadow: 1px 1px 5px rgb(94, 80, 80);
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  width: 480px;
+  justify-content: space-between;
+}
+.search-input {
+  border-radius: 10px;
+  font-size: 19px;
+  width: 230px;
+  height: 25px;
+  padding-left: 5px;
+}
+
+/* MAIN */
+
+main {
+  background-color: #1a1b1d;
+}
+
+/* RESULT BOARD */
+
+.result-board {
+  padding-top: 25px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto", sans-serif;
+}
+
+h2 {
+  font-family: "Marvel", sans-serif;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  margin-inline: auto;
+  border-bottom: 1px rgb(128, 128, 128) solid;
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+}
+
+h3 {
+  font-family: "Marvel", sans-serif;
+}
+
+.search-board {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(150, 150, 150);
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+  font-size: 18px;
+}
+
+.page-input {
+  width: 55px;
+  border-radius: 5px;
+}
+
+.page-count {
+  display: flex;
+  flex-direction: column;
+}
+
+.pagination button {
+  margin-inline: 4px 4px;
+}
+
+/* CARDS */
+
+.cardboard {
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  height: 290px;
+  margin: 15px;
+  border: solid rgb(255, 255, 255) 1px;
+  background-color: rgb(44, 37, 37);
+  box-shadow: 1px 1px 5px rgb(160, 160, 160);
+  border-radius: 20px;
+}
+
+.card:hover {
+  background-color: rgb(54, 29, 29);
+}
+
+.card img {
+  width: 195px;
+  height: 200px;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  padding: 5px;
+
+  display: flex;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 35px;
+  overflow: hidden;
+  height: 45px;
 }

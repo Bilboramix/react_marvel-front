@@ -25,7 +25,7 @@ const Character = ({ canSearch, setCanSearch }) => {
   }, [characterId, setCanSearch]);
 
   return isLoading ? (
-    <div>Loading...</div>
+    <section className="container">Loading...</section>
   ) : (
     <section className="container">
       <div>

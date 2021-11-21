@@ -1,5 +1,6 @@
 import "./App.css";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Comics from "./pages/Comics";
 
 import Character from "./pages/Character";
@@ -22,10 +23,11 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Characters canSearch={canSearch} setCanSearch={setCanSearch} search={search} />} />
           <Route path="/comics" element={<Comics canSearch={canSearch} setCanSearch={setCanSearch} search={search} />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/favorites" element={<Favorites setCanSearch={setCanSearch} />} />
           <Route path="/character" element={<Character canSearch={canSearch} setCanSearch={setCanSearch} />} />
         </Routes>
       </main>
+      <Footer />
     </Router>
   );
 };

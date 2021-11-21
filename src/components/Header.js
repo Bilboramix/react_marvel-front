@@ -10,22 +10,25 @@ const Header = ({ setSearch, canSearch }) => {
         <Link to="/">
           <img src={logo} alt="logo" />
         </Link>
-        <Link to="/">Personnages</Link>
-        <Link to="/comics">Comics</Link>
-        <Link to="/favorites">Favoris</Link>
 
         {canSearch === true && (
           <form
+            className="search"
             onSubmit={(e) => {
               e.preventDefault();
               setSearch(input);
             }}
           >
             <span>Rechercher par nom : </span>
-            <input type="text" onChange={(e) => setInput(e.target.value)} />
+            <input className="search-input" type="text" onChange={(e) => setInput(e.target.value)} />
             <button type="submit">Go</button>
           </form>
         )}
+        <div className="menu">
+          <Link to="/">Personnages</Link>
+          <Link to="/comics">Comics</Link>
+          <Link to="/favorites">Favoris</Link>
+        </div>
       </nav>
     </header>
   );

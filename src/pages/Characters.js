@@ -61,83 +61,86 @@ const Characters = ({ search, canSearch, setCanSearch }) => {
   };
 
   return isLoading ? (
-    <p>Loading ...</p>
+    <section className="container">Loading ...</section>
   ) : (
-    <section className="container">
-      <div>
-        <h2>Liste des personnages de Marvel</h2>
-        <ul>
-          <li>Résultats totaux : {data.count}</li>
-          <li>Nombre de pages : {Math.round(data.count / data.limit)}</li>
+    <section className="container result-board">
+      <h2>Liste des personnages de Marvel</h2>
+      <div className="search-board">
+        <div className="page-count">
+          <label>Résultats totaux : {data.count}</label>
+          <label>Nombre de pages : {Math.round(data.count / data.limit)}</label>
+        </div>
+        <div className="pagination">
+          <label>Page actuelle : {page}</label>
+          {page < data.count && (
+            <button
+              onClick={() => {
+                setPage(page + 1);
+              }}
+            >
+              Next
+            </button>
+          )}
+          {page > 1 && <button onClick={() => setPage(page - 1)}>Prev</button>}
+        </div>
+        <div>
+          <form onSubmit={handlePagePicker}>
+            Aller à la page <input className="page-input" onChange={(e) => setPagePicker(e.target.value)} type="number" name="page" value={pagePicker} /> <button type="submit">Go</button>
+          </form>
+        </div>
 
-          <li>Page actuelle : {page}</li>
-
-          <li>
-            {page < data.count && (
-              <button
-                onClick={() => {
-                  setPage(page + 1);
+        <div className="pagination">
+          <label>Résultats par page : {data.limit}</label>
+          <button
+            onClick={() => {
+              //setUrl("http://localhost:3001/comics?limit=25");
+              setLimitQuery(25);
+            }}
+          >
+            25
+          </button>
+          <button
+            onClick={() => {
+              //setUrl("http://localhost:3001/comics?limit=50");
+              setLimitQuery(50);
+            }}
+          >
+            50
+          </button>
+          <button
+            onClick={() => {
+              //setUrl("http://localhost:3001/comics?limit=100");
+              setLimitQuery(100);
+            }}
+          >
+            100
+          </button>
+        </div>
+      </div>
+      <div className="cardboard">
+        {data.results.map((character, index) => {
+          return (
+            <div className="card" key={character._id}>
+              <Link
+                to={{
+                  pathname: "/character",
+                  search: character._id,
                 }}
               >
-                Next
+                <h3>{character.name}</h3>
+                <img src={character.thumbnail.path + "." + character.thumbnail.extension} alt={character.name} />
+              </Link>
+              <button
+                onClick={() => {
+                  handleFavorite(character);
+                }}
+              >
+                Ajouter aux favoris
               </button>
-            )}
-            {page > 1 && <button onClick={() => setPage(page - 1)}>Prev</button>}
-          </li>
-          <form onSubmit={handlePagePicker}>
-            Aller à la page <input onChange={(e) => setPagePicker(e.target.value)} type="number" name="page" value={pagePicker} /> <button type="submit">Go</button>
-          </form>
-          <li>Résultats par page : {data.limit}</li>
-          <li>
-            <button
-              onClick={() => {
-                //setUrl("http://localhost:3001/comics?limit=25");
-                setLimitQuery(25);
-              }}
-            >
-              25
-            </button>
-            <button
-              onClick={() => {
-                //setUrl("http://localhost:3001/comics?limit=50");
-                setLimitQuery(50);
-              }}
-            >
-              50
-            </button>
-            <button
-              onClick={() => {
-                //setUrl("http://localhost:3001/comics?limit=100");
-                setLimitQuery(100);
-              }}
-            >
-              100
-            </button>
-          </li>
-        </ul>
+            </div>
+          );
+        })}
       </div>
-      {data.results.map((character, index) => {
-        return (
-          <div key={character._id}>
-            <Link
-              to={{
-                pathname: "/character",
-                search: character._id,
-              }}
-            >
-              <p>{character.name}</p>
-              <img src={character.thumbnail.path + "." + character.thumbnail.extension} alt={character.name} />
-            </Link>
-            <button
-              onClick={() => {
-                handleFavorite(character);
-              }}
-            >
-              Ajouter aux favoris
-            </button>
-          </div>
-        );
-      })}
     </section>
   );
 };

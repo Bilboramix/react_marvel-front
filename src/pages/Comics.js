@@ -60,9 +60,9 @@ const Comics = ({ search, canSearch, setCanSearch }) => {
   };
 
   return isLoading ? (
-    <p>Loading ...</p>
+    <section className="container">Loading ...</section>
   ) : (
-    <section className="container">
+    <section className="container result-board">
       <div>
         <h2>Liste des comics de Marvel</h2>
         <ul>
