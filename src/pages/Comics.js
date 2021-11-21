@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-const Comics = ({ search }) => {
+const Comics = ({ search, canSearch, setCanSearch }) => {
   const [limitQuery, setLimitQuery] = useState(100);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
@@ -9,6 +9,7 @@ const Comics = ({ search }) => {
   const [data, setData] = useState();
 
   useEffect(() => {
+    setCanSearch(true);
     const fetchData = async () => {
       try {
         setIsLoading(true);
@@ -25,7 +26,7 @@ const Comics = ({ search }) => {
     };
 
     fetchData();
-  }, [limitQuery, page, search]);
+  }, [limitQuery, page, search, setCanSearch]);
 
   const handlePagePicker = (e) => {
     e.preventDefault();

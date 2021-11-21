@@ -1,25 +1,29 @@
 import "./App.css";
 import Header from "./components/Header";
 import Comics from "./pages/Comics";
-import { useState } from "react";
+
+import Character from "./pages/Character";
 import Characters from "./pages/Characters";
 import Favorites from "./pages/Favorites";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
-//TODO - recherche, favoris, CSS
+//TODO - clic sur personnage, favoris, CSS
 //DOC API : https://lereacteur-marvel-api.netlify.app/documentation
 
 const App = () => {
   const [search, setSearch] = useState("");
+  const [canSearch, setCanSearch] = useState(false);
 
   return (
     <Router>
-      <Header setSearch={setSearch} />
+      <Header canSearch={canSearch} setSearch={setSearch} />
       <main>
         <Routes>
-          <Route path="/" element={<Characters search={search} />} />
-          <Route path="/comics" element={<Comics search={search} />} />
+          <Route path="/" element={<Characters canSearch={canSearch} setCanSearch={setCanSearch} search={search} />} />
+          <Route path="/comics" element={<Comics canSearch={canSearch} setCanSearch={setCanSearch} search={search} />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/character" element={<Character canSearch={canSearch} setCanSearch={setCanSearch} />} />
         </Routes>
       </main>
     </Router>

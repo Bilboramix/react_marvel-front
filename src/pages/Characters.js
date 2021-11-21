@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-const Characters = ({ search }) => {
+import { Link } from "react-router-dom";
+const Characters = ({ search, canSearch, setCanSearch }) => {
   const [limitQuery, setLimitQuery] = useState(100);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
@@ -10,6 +11,7 @@ const Characters = ({ search }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setCanSearch(true);
       try {
         setIsLoading(true);
         let url = `http://localhost:3001/characters?limit=${limitQuery}&page=${page}`;
@@ -18,6 +20,7 @@ const Characters = ({ search }) => {
         }
         console.log(url);
         const response = await axios.get(url);
+        console.log("response characterSS =======> ", response);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -26,7 +29,7 @@ const Characters = ({ search }) => {
     };
 
     fetchData();
-  }, [limitQuery, page, search]);
+  }, [limitQuery, page, search, setCanSearch]);
 
   const handlePagePicker = (e) => {
     e.preventDefault();
@@ -96,8 +99,15 @@ const Characters = ({ search }) => {
       {data.results.map((character, index) => {
         return (
           <div key={character._id}>
-            <p>{character.name}</p>
-            <img src={character.thumbnail.path + "." + character.thumbnail.extension} alt={character.name} />
+            <Link
+              to={{
+                pathname: "/character",
+                search: character._id,
+              }}
+            >
+              <p>{character.name}</p>
+              <img src={character.thumbnail.path + "." + character.thumbnail.extension} alt={character.name} />
+            </Link>
           </div>
         );
       })}
